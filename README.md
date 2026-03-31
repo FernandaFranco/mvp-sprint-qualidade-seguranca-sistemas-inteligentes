@@ -2,6 +2,11 @@
 
 MVP da pós-graduação em Engenharia de Software da PUC-Rio. O projeto utiliza modelos de machine learning para prever o nível de engajamento (Alto, Médio ou Baixo) de jogadores online, com base em dados demográficos e métricas de jogo.
 
+## Links
+
+- [Notebook no Google Colab](https://colab.research.google.com/drive/1TdLTwHil_aeLKGLA_u4ADDnOixhQv9rc?usp=sharing)
+- [Vídeo de apresentação](https://youtube.com/seu-link-aqui)
+
 ## Tecnologias
 
 - **Machine Learning:** Python, Scikit-Learn, Pandas, NumPy
@@ -35,7 +40,7 @@ Com o ambiente virtual ativo na pasta backend:
 
 ## Notebook
 
-O notebook `MVP_Qualidade_Software_Segurança_Sistemas_Inteligentes.ipynb` contém todo o processo de criação do modelo de machine learning. Pode ser aberto e executado no Google Colab sem necessidade de configuração adicional.
+O notebook `MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb` contém todo o processo de criação do modelo de machine learning. Pode ser aberto e executado no Google Colab sem necessidade de configuração adicional. Se preferir, use a URL acima.
 
 ## Dataset
 
