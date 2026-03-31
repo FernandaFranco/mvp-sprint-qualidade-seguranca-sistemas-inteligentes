@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎮 Preditor de Engajamento Gamer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎮 PREDITOR DE<br />ENGAJAMENTO<br />GAMER</h1>
+      </header>
+
+      <p class="coin-insert">[ INSIRA UMA MOEDA PARA JOGAR ]</p>
+
+      <!-- PLAYER INFO -->
+      <div class="game-panel">
+        <h2 class="panel-title">INFO DO JOGADOR</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="age">IDADE</label>
+            <input
+              type="number"
+              id="age"
+              placeholder="Ex: 25"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div class="form-group">
+            <label for="gender">GÊNERO</label>
+            <select id="gender">
+              <option value="">SELECIONE...</option>
+              <option value="Male">Masculino</option>
+              <option value="Female">Feminino</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="location">LOCALIZAÇÃO</label>
+          <select id="location">
+            <option value="">SELECIONE...</option>
+            <option value="USA">EUA</option>
+            <option value="Europe">Europa</option>
+            <option value="Asia">Ásia</option>
+            <option value="Other">Outro</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- GAME STATS -->
+      <div class="game-panel">
+        <h2 class="panel-title">ESTATÍSTICAS DE JOGO</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="gameGenre">GÊNERO DO JOGO</label>
+            <select id="gameGenre">
+              <option value="">SELECIONE...</option>
+              <option value="Action">Ação</option>
+              <option value="RPG">RPG</option>
+              <option value="Simulation">Simulação</option>
+              <option value="Sports">Esportes</option>
+              <option value="Strategy">Estratégia</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gameDifficulty">DIFICULDADE</label>
+            <select id="gameDifficulty">
+              <option value="">SELECIONE...</option>
+              <option value="Easy">Fácil</option>
+              <option value="Medium">Médio</option>
+              <option value="Hard">Difícil</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="playTimeHours">TEMPO DE JOGO (h)</label>
+            <input
+              type="number"
+              id="playTimeHours"
+              placeholder="Ex: 10.5"
+              min="0"
+              step="0.1"
+            />
+          </div>
+          <div class="form-group">
+            <label for="inGamePurchases">COMPRAS NO JOGO</label>
+            <select id="inGamePurchases">
+              <option value="">SELECIONE...</option>
+              <option value="0">Não</option>
+              <option value="1">Sim</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sessionsPerWeek">SESSÕES / SEMANA</label>
+            <input
+              type="number"
+              id="sessionsPerWeek"
+              placeholder="Ex: 5"
+              min="0"
+            />
+          </div>
+          <div class="form-group">
+            <label for="avgSessionDuration">DURAÇÃO MÉDIA (min)</label>
+            <input
+              type="number"
+              id="avgSessionDuration"
+              placeholder="Ex: 90"
+              min="0"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="playerLevel">NÍVEL DO JOGADOR</label>
+            <input
+              type="number"
+              id="playerLevel"
+              placeholder="Ex: 45"
+              min="0"
+            />
+          </div>
+          <div class="form-group">
+            <label for="achievementsUnlocked">CONQUISTAS</label>
+            <input
+              type="number"
+              id="achievementsUnlocked"
+              placeholder="Ex: 20"
+              min="0"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- PREDICT BUTTON -->
+      <button class="btn-predict" id="predictBtn" onclick="predict()">
+        ▶ INICIAR PREDIÇÃO ◀
+      </button>
+
+      <!-- LOADING -->
+      <div class="loading" id="loading">
+        <p class="loading-text">
+          ANALISANDO DADOS DO JOGADOR<span class="loading-dots"></span>
+        </p>
+      </div>
+
+      <!-- ERROR -->
+      <div class="error-msg" id="errorMsg"></div>
+
+      <!-- RESULT -->
+      <div class="result-panel" id="resultPanel">
+        <p class="result-label">- - - NÍVEL DE ENGAJAMENTO - - -</p>
+        <p class="result-value" id="resultValue"></p>
+        <div class="result-bar" id="resultBar"></div>
+        <button class="play-again" onclick="resetForm()">
+          ↻ JOGAR DE NOVO
+        </button>
+      </div>
+
+      <footer>
+        DESENVOLVIDO POR FERNANDA FRANCO<br />
+        PÓS-GRADUAÇÃO EM ENGENHARIA DE SOFTWARE · PUC-RIO<br />
+        SPRINT: QUALIDADE · SEGURANÇA · SISTEMAS INTELIGENTES<br />
+        2026
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
