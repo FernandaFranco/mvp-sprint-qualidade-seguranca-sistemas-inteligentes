@@ -4,7 +4,7 @@ import pytest
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, recall_score
 from pathlib import Path
-from app import app
+from backend.app import app
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -67,12 +67,12 @@ def test_recall_por_classe():
 # ===== TESTES DE API FLASK =====
 
 
-@pytest.fixture
-def client():
+@pytest.fixture(name="client")
+def flask_client():
     """Fixture para cliente Flask de testes"""
     app.config["TESTING"] = True
-    with app.test_client() as client:
-        yield client
+    with app.test_client() as test_client:
+        yield test_client
 
 
 def test_api_home(client):

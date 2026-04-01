@@ -362,17 +362,17 @@ def predict():
 
     except KeyError:
         return jsonify({"error": "Campo esperado não encontrado"}), 400
-    except Exception:
+    except (ValueError, TypeError):
         return jsonify({"error": "Erro ao processar predição"}), 500
 
 
 @app.errorhandler(404)
-def not_found(error):
+def not_found(_error):
     return jsonify({"error": "Rota não encontrada"}), 404
 
 
 @app.errorhandler(405)
-def method_not_allowed(error):
+def method_not_allowed(_error):
     return jsonify({"error": "Método HTTP não permitido"}), 405
 
 
