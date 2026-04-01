@@ -64,9 +64,10 @@ def client():
 
 
 def test_api_home(client):
-    """Testa rota home"""
-    response = client.get("/")
-    assert response.status_code == 200
+    """Testa rota home redirecionando para /docs"""
+    response = client.get("/", follow_redirects=False)
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/docs"
 
 
 def test_api_predict_sucesso(client):
@@ -390,12 +391,10 @@ def test_api_metodo_nao_permitido(client):
 
 
 def test_api_home_ok(client):
-    """Testa rota home retorna status ok"""
-    response = client.get("/")
+    """Testa rota home redirecionando para a documentação Swagger UI"""
+    response = client.get("/", follow_redirects=True)
     assert response.status_code == 200
-    data = response.get_json()
-    assert data["status"] == "ok"
-    assert "message" in data
+    assert b"Swagger UI" in response.data
 
 
 # ===== TESTES DE DADOS E MODELO =====
