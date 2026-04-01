@@ -3,6 +3,9 @@ from flask_cors import CORS
 import pickle
 import pandas as pd
 import numpy as np
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 
 app = Flask(__name__)
 CORS(app, resources={r"/predict": {"origins": [
@@ -144,10 +147,10 @@ OPENAPI_SPEC = {
     },
 }
 
-with open("modelo.pkl", "rb") as f:
+with open(BASE_DIR / "modelo.pkl", "rb") as f:
     modelo = pickle.load(f)
 
-with open("scaler.pkl", "rb") as f:
+with open(BASE_DIR / "scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
 
