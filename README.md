@@ -28,6 +28,46 @@ No terminal, navegue até a pasta do backend, crie o ambiente virtual, instale a
 
 O servidor será iniciado em http://localhost:5000
 
+### API
+
+- Endpoint: `POST /predict`
+- Content-Type: `application/json`
+- Corpo esperado:
+
+```json
+{
+  "Age": 25,
+  "Gender": "Male",
+  "PlayTimeHours": 100.5,
+  "InGamePurchases": 50,
+  "GameDifficulty": "Medium",
+  "SessionsPerWeek": 5,
+  "AvgSessionDurationMinutes": 60,
+  "PlayerLevel": 50,
+  "AchievementsUnlocked": 20,
+  "Location": "USA",
+  "GameGenre": "Action"
+}
+```
+
+- Resposta de sucesso:
+
+```json
+{ "prediction": "High" }
+```
+
+- Respostas de erro possíveis:
+
+```json
+{ "error": "Campos obrigatórios faltando: Age" }
+{ "error": "Age deve ser um número válido" }
+{ "error": "Gênero inválido" }
+{ "error": "Erro ao processar predição" }
+```
+
+- Documentação interativa disponível em `http://localhost:5000/docs`
+- A raiz `http://localhost:5000/` redireciona automaticamente para a documentação Swagger UI.
+
 ### Frontend
 
 Com o backend rodando, abra o arquivo `frontend/index.html` diretamente no navegador (duplo clique no arquivo).

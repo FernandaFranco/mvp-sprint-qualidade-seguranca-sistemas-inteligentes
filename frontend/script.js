@@ -92,12 +92,15 @@ async function predict() {
       body: JSON.stringify(data),
     });
 
+    const payload = await response.json().catch(() => null);
     if (!response.ok) {
-      throw new Error("Erro na API");
+      const backendError = payload?.error || "Erro na API";
+      errorMsg.textContent = `⚠ ${backendError} ⚠`;
+      errorMsg.classList.add("show");
+      return;
     }
 
-    const result = await response.json();
-    showResult(result.prediction);
+    showResult(payload.prediction);
   } catch (error) {
     errorMsg.textContent = "⚠ ERRO DE CONEXÃO COM O SERVIDOR ⚠";
     errorMsg.classList.add("show");
