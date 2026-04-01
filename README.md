@@ -1,5 +1,7 @@
 # Classificação: Engajamento de Jogadores Online
 
+[![Python CI](https://github.com/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/actions/workflows/python-app.yml/badge.svg)](https://github.com/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/actions/workflows/python-app.yml)
+
 MVP da pós-graduação em Engenharia de Software da PUC-Rio. O projeto utiliza modelos de machine learning para prever o nível de engajamento (Alto, Médio ou Baixo) de jogadores online, com base em dados demográficos e métricas de jogo.
 
 ## Links
