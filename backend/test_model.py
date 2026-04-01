@@ -1,6 +1,5 @@
 import pickle
 import pandas as pd
-import numpy as np
 import pytest
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, recall_score
@@ -17,11 +16,20 @@ with open(BASE_DIR / "scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
 # Carregar e preparar os dados (mesmo processo do notebook)
-url = "https://raw.githubusercontent.com/FernandaFranco/Gaming-Behavior/main/online_gaming_behavior_dataset.csv"
+url = (
+    "https://raw.githubusercontent.com/FernandaFranco/Gaming-Behavior/main/"
+    "online_gaming_behavior_dataset.csv"
+)
 df = pd.read_csv(url)
 df = df.drop("PlayerID", axis=1)
 df["Gender"] = df["Gender"].map({"Female": 0, "Male": 1})
-df["GameDifficulty"] = df["GameDifficulty"].map({"Easy": 0, "Medium": 1, "Hard": 2})
+df["GameDifficulty"] = df["GameDifficulty"].map(
+    {
+        "Easy": 0,
+        "Medium": 1,
+        "Hard": 2,
+    }
+)
 df = pd.get_dummies(df, columns=["Location"], dtype=int)
 df = pd.get_dummies(df, columns=["GameGenre"], dtype=int)
 
@@ -52,7 +60,8 @@ def test_recall_por_classe():
     recall = recall_score(
         y_test, y_pred, average=None, labels=["High", "Medium", "Low"]
     )
-    assert (recall >= 0.80).all(), f"Recall por classe {recall} abaixo do mínimo 0.80"
+    recall_minimo = (recall >= 0.80).all()
+    assert recall_minimo, f"Recall por classe {recall} abaixo do mínimo 0.80"
 
 
 # ===== TESTES DE API FLASK =====

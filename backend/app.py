@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, redirect
 from flask_cors import CORS
 import pickle
 import pandas as pd
-import numpy as np
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -20,7 +19,10 @@ OPENAPI_SPEC = {
     "info": {
         "title": "Predictor de Engajamento Gamer",
         "version": "1.0.0",
-        "description": "API para prever nível de engajamento de jogadores baseado em dados de uso e perfil.",
+        "description": (
+            "API para prever nível de engajamento de jogadores "
+            "baseado em dados de uso e perfil."
+        ),
     },
     "paths": {
         "/predict": {
@@ -42,7 +44,10 @@ OPENAPI_SPEC = {
                                         "type": "string",
                                         "enum": ["Male", "Female"],
                                     },
-                                    "PlayTimeHours": {"type": "number", "minimum": 0},
+                                    "PlayTimeHours": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                    },
                                     "InGamePurchases": {
                                         "type": "integer",
                                         "minimum": 0,
@@ -72,7 +77,12 @@ OPENAPI_SPEC = {
                                     },
                                     "Location": {
                                         "type": "string",
-                                        "enum": ["USA", "Europe", "Asia", "Other"],
+                                        "enum": [
+                                            "USA",
+                                            "Europe",
+                                            "Asia",
+                                            "Other",
+                                        ],
                                     },
                                     "GameGenre": {
                                         "type": "string",
@@ -104,7 +114,9 @@ OPENAPI_SPEC = {
                 },
                 "responses": {
                     "200": {
-                        "description": "Predição de engajamento realizada com sucesso",
+                        "description": (
+                            "Predição de engajamento realizada com sucesso"
+                        ),
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -125,7 +137,9 @@ OPENAPI_SPEC = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties": {"error": {"type": "string"}},
+                                    "properties": {
+                                        "error": {"type": "string"}
+                                    },
                                 }
                             }
                         },
@@ -136,7 +150,9 @@ OPENAPI_SPEC = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "properties": {"error": {"type": "string"}},
+                                    "properties": {
+                                        "error": {"type": "string"}
+                                    },
                                 }
                             }
                         },
@@ -166,33 +182,40 @@ def openapi_spec():
 
 @app.route("/docs")
 def swagger_ui():
-    return """<!doctype html>
-<html lang=\"pt-BR\">
-  <head>
-    <meta charset=\"utf-8\" />
-    <title>Swagger UI - API de Engajamento Gamer</title>
-    <link rel=\"stylesheet\" href=\"https://unpkg.com/swagger-ui-dist/swagger-ui.css\" />
-    <style>body { margin:0; padding:0; }</n    </style>
-  </head>
-  <body>
-    <div id=\"swagger-ui\"></div>
-    <script src=\"https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js\"></script>
-    <script src=\"https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js\"></script>
-    <script>
-      window.onload = function() {
-        SwaggerUIBundle({
-          url: '/openapi.json',
-          dom_id: '#swagger-ui',
-          presets: [
-            SwaggerUIBundle.presets.apis,
-            SwaggerUIStandalonePreset
-          ],
-          layout: 'StandaloneLayout'
-        });
-      };
-    </script>
-  </body>
-</html>"""
+    return (
+        "<!doctype html>\n"
+        "<html lang=\"pt-BR\">\n"
+        "  <head>\n"
+        "    <meta charset=\"utf-8\" />\n"
+        "    <title>Swagger UI - API de Engajamento Gamer</title>\n"
+        "    <link rel=\"stylesheet\" "
+        "href=\"https://unpkg.com/swagger-ui-dist/swagger-ui.css\" />\n"
+        "    <style>body { margin:0; padding:0; }</style>\n"
+        "  </head>\n"
+        "  <body>\n"
+        "    <div id=\"swagger-ui\"></div>\n"
+        "    <script "
+        "src=\"https://unpkg.com/swagger-ui-dist/"
+        "swagger-ui-bundle.js\"></script>\n"
+        "    <script "
+        "src=\"https://unpkg.com/swagger-ui-dist/"
+        "swagger-ui-standalone-preset.js\"></script>\n"
+        "    <script>\n"
+        "      window.onload = function() {\n"
+        "        SwaggerUIBundle({\n"
+        "          url: '/openapi.json',\n"
+        "          dom_id: '#swagger-ui',\n"
+        "          presets: [\n"
+        "            SwaggerUIBundle.presets.apis,\n"
+        "            SwaggerUIStandalonePreset\n"
+        "          ],\n"
+        "          layout: 'StandaloneLayout'\n"
+        "        });\n"
+        "      };\n"
+        "    </script>\n"
+        "  </body>\n"
+        "</html>\n"
+    )
 
 
 @app.route("/predict", methods=["POST"])
@@ -224,12 +247,9 @@ def predict():
             f for f in required_fields if f not in data or data[f] is None
         ]
         if missing_fields:
+            missing = ", ".join(missing_fields)
             return (
-                jsonify(
-                    {
-                        "error": f"Campos obrigatórios faltando: {', '.join(missing_fields)}"
-                    }
-                ),
+                jsonify({"error": f"Campos obrigatórios faltando: {missing}"}),
                 400,
             )
 
@@ -249,17 +269,19 @@ def predict():
             try:
                 value = float(data.get(field, -1))
                 if value < range_limits["min"] or value > range_limits["max"]:
+                    error_message = (
+                        f"{field} deve estar entre {range_limits['min']} "
+                        f"e {range_limits['max']}"
+                    )
                     return (
-                        jsonify(
-                            {
-                                "error": f"{field} deve estar entre {range_limits['min']} e {range_limits['max']}"
-                            }
-                        ),
+                        jsonify({"error": error_message}),
                         400,
                     )
             except (ValueError, TypeError):
-                return jsonify({"error": f"{field} deve ser um número válido"}), 400
-
+                return (
+                    jsonify({"error": f"{field} deve ser um número válido"}),
+                    400,
+                )
         # Validar campos categóricos
         valid_genders = {"Male", "Female"}
         valid_difficulties = {"Easy", "Medium", "Hard"}
@@ -285,7 +307,9 @@ def predict():
                     "InGamePurchases": data["InGamePurchases"],
                     "GameDifficulty": data["GameDifficulty"],
                     "SessionsPerWeek": data["SessionsPerWeek"],
-                    "AvgSessionDurationMinutes": data["AvgSessionDurationMinutes"],
+                    "AvgSessionDurationMinutes": (
+                        data["AvgSessionDurationMinutes"]
+                    ),
                     "PlayerLevel": data["PlayerLevel"],
                     "AchievementsUnlocked": data["AchievementsUnlocked"],
                     "Location": data["Location"],
