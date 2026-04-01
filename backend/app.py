@@ -5,7 +5,12 @@ import pandas as pd
 import numpy as np
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/predict": {"origins": [
+    "http://localhost:5000",
+    "http://127.0.0.1:5000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000"
+]}})
 
 OPENAPI_SPEC = {
     "openapi": "3.0.0",

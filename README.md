@@ -70,13 +70,26 @@ O servidor será iniciado em http://localhost:5000
 
 ### Frontend
 
-Com o backend rodando, abra o arquivo `frontend/index.html` diretamente no navegador (duplo clique no arquivo).
+Com o backend rodando, abra o terminal na pasta `frontend` e execute um servidor local:
+
+```bash
+cd frontend
+python3 -m http.server 8000
+```
+
+Em seguida, abra `http://localhost:8000` no navegador.
+
+> O backend restringe CORS apenas para origens confiáveis durante o desenvolvimento.
 
 ### Testes
 
 Com o ambiente virtual ativo na pasta backend:
 
     pytest test_model.py -v
+
+### Integração contínua
+
+O repositório agora inclui um workflow GitHub Actions em `.github/workflows/python-app.yml` que executa `pytest` em cada push e pull request para `main`.
 
 ## Notebook
 
