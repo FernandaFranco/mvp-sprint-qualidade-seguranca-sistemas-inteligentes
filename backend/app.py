@@ -23,6 +23,43 @@ def home():
 def predict():
     data = request.get_json()
 
+    # Validar ranges dos valores numéricos
+    validations = {
+        "Age": {"min": 5, "max": 100},
+        "PlayTimeHours": {"min": 0, "max": 10000},
+        "InGamePurchases": {"min": 0, "max": 100000},
+        "SessionsPerWeek": {"min": 0, "max": 168},
+        "AvgSessionDurationMinutes": {"min": 1, "max": 1440},
+        "PlayerLevel": {"min": 1, "max": 999},
+        "AchievementsUnlocked": {"min": 0, "max": 10000},
+    }
+
+    # Validar cada campo numérico
+    for field, range_limits in validations.items():
+        try:
+            value = float(data.get(field, -1))
+            if value < range_limits["min"] or value > range_limits["max"]:
+                return jsonify(
+                    {"error": f"{field} deve estar entre {range_limits['min']} e {range_limits['max']}"}
+                ), 400
+        except (ValueError, TypeError):
+            return jsonify({"error": f"{field} deve ser um número válido"}), 400
+
+    # Validar campos categóricos
+    valid_genders = {"Male", "Female"}
+    valid_difficulties = {"Easy", "Medium", "Hard"}
+    valid_locations = {"USA", "Europe", "Asia", "Other"}
+    valid_genres = {"Action", "Sports", "RPG", "Strategy", "Simulation"}
+
+    if data.get("Gender") not in valid_genders:
+        return jsonify({"error": "Gênero inválido"}), 400
+    if data.get("GameDifficulty") not in valid_difficulties:
+        return jsonify({"error": "Dificuldade inválida"}), 400
+    if data.get("Location") not in valid_locations:
+        return jsonify({"error": "Localização inválida"}), 400
+    if data.get("GameGenre") not in valid_genres:
+        return jsonify({"error": "Gênero de jogo inválido"}), 400
+
     # Montar DataFrame com os mesmos nomes do notebook
     df = pd.DataFrame(
         [

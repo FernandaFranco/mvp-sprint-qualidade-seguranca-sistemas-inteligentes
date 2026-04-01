@@ -35,6 +35,26 @@ function getFormData() {
   fields.PlayerLevel = parseInt(fields.PlayerLevel);
   fields.AchievementsUnlocked = parseInt(fields.AchievementsUnlocked);
 
+  // Validar ranges dos valores numéricos
+  const validations = [
+    { field: "Age", min: 5, max: 100, label: "Idade" },
+    { field: "PlayTimeHours", min: 0, max: 10000, label: "Horas de Jogo" },
+    { field: "InGamePurchases", min: 0, max: 100000, label: "Compras no Jogo" },
+    { field: "SessionsPerWeek", min: 0, max: 168, label: "Sessões por Semana" },
+    { field: "AvgSessionDurationMinutes", min: 1, max: 1440, label: "Duração Média da Sessão" },
+    { field: "PlayerLevel", min: 1, max: 999, label: "Nível do Jogador" },
+    { field: "AchievementsUnlocked", min: 0, max: 10000, label: "Conquistas Desbloqueadas" },
+  ];
+
+  for (const validation of validations) {
+    const value = fields[validation.field];
+    if (isNaN(value) || value < validation.min || value > validation.max) {
+      return {
+        error: `${validation.label} deve estar entre ${validation.min} e ${validation.max}`,
+      };
+    }
+  }
+
   return fields;
 }
 
@@ -51,6 +71,12 @@ async function predict() {
   const data = getFormData();
   if (!data) {
     errorMsg.textContent = "⚠ PREENCHA TODOS OS CAMPOS PARA CONTINUAR ⚠";
+    errorMsg.classList.add("show");
+    return;
+  }
+
+  if (data.error) {
+    errorMsg.textContent = `⚠ ${data.error} ⚠`;
     errorMsg.classList.add("show");
     return;
   }
