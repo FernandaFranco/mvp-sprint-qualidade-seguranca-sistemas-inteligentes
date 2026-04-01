@@ -2,7 +2,7 @@
 
 [![Python CI](https://github.com/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/actions/workflows/python-app.yml/badge.svg)](https://github.com/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/actions/workflows/python-app.yml)
 
-MVP da pós-graduação em Engenharia de Software da PUC-Rio. O projeto utiliza modelos de machine learning para prever o nível de engajamento (Alto, Médio ou Baixo) de jogadores online, com base em dados demográficos e métricas de jogo.
+MVP da sprint de Qualidade de Software, Segurança e Sistemas Inteligentes da pós-graduação em Engenharia de Software da PUC-Rio. O projeto utiliza modelos de machine learning para prever o nível de engajamento (Alto, Médio ou Baixo) de jogadores online, com base em dados demográficos e métricas de jogo.
 
 ## Links
 
@@ -11,7 +11,7 @@ MVP da pós-graduação em Engenharia de Software da PUC-Rio. O projeto utiliza 
 
 ## Tecnologias
 
-- **Machine Learning:** Python, Scikit-Learn, Pandas, NumPy
+- **Machine Learning:** Python, Scikit-Learn, Pandas
 - **Backend:** Flask, Flask-CORS
 - **Frontend:** HTML, CSS, JavaScript
 - **Testes:** PyTest
@@ -29,6 +29,19 @@ No terminal, navegue até a pasta do backend, crie o ambiente virtual, instale a
     python app.py
 
 O servidor será iniciado em http://localhost:5000
+
+### Frontend
+
+Com o backend rodando, abra o terminal na pasta `frontend` e execute um servidor local:
+
+```bash
+cd frontend
+python3 -m http.server 8000
+```
+
+Em seguida, abra `http://localhost:8000` no navegador.
+
+> O backend restringe CORS apenas para origens confiáveis durante o desenvolvimento.
 
 ### API
 
@@ -70,24 +83,12 @@ O servidor será iniciado em http://localhost:5000
 - Documentação interativa disponível em `http://localhost:5000/docs`
 - A raiz `http://localhost:5000/` redireciona automaticamente para a documentação Swagger UI.
 
-### Frontend
-
-Com o backend rodando, abra o terminal na pasta `frontend` e execute um servidor local:
-
-```bash
-cd frontend
-python3 -m http.server 8000
-```
-
-Em seguida, abra `http://localhost:8000` no navegador.
-
-> O backend restringe CORS apenas para origens confiáveis durante o desenvolvimento.
-
 ### Testes
 
-Com o ambiente virtual ativo na pasta backend:
+Na raiz do projeto, ative o ambiente virtual e execute os testes:
 
-    pytest test_model.py -v
+    source backend/env/bin/activate
+    pytest backend/test_model.py -v
 
 ### Integração contínua
 
@@ -105,6 +106,9 @@ O dataset contém 40.034 registros com métricas de jogadores online. O modelo e
 
 ## Estrutura do projeto
 
+    ├── .github/
+    │   └── workflows/
+    │       └── python-app.yml    # Workflow de CI
     ├── backend/
     │   ├── app.py                # API Flask
     │   ├── modelo.pkl            # Modelo treinado
@@ -115,4 +119,4 @@ O dataset contém 40.034 registros com métricas de jogadores online. O modelo e
     │   ├── index.html            # Página principal
     │   ├── style.css             # Estilos (tema 8-bit)
     │   └── script.js             # Lógica do frontend
-    └── MVP_Qualidade_Software_Segurança_Sistemas_Inteligentes.ipynb
+    └── MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb
