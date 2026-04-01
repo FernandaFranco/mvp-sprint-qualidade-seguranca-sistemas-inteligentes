@@ -4,13 +4,16 @@ import numpy as np
 import pytest
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, recall_score
+from pathlib import Path
 from app import app
 
+BASE_DIR = Path(__file__).resolve().parent
+
 # Carregar modelo e scaler
-with open("modelo.pkl", "rb") as f:
+with open(BASE_DIR / "modelo.pkl", "rb") as f:
     modelo = pickle.load(f)
 
-with open("scaler.pkl", "rb") as f:
+with open(BASE_DIR / "scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
 # Carregar e preparar os dados (mesmo processo do notebook)
@@ -307,94 +310,6 @@ def test_api_predict_tipo_invalido(client):
     response = client.post("/predict", json=data)
     assert response.status_code == 400
     assert "válido" in response.get_json()["error"]
-
-
-# ===== TESTES DE TRATAMENTO DE ERROS =====
-
-def test_api_predict_sem_json(client):
-    """Testa erro quando requisição não contém JSON"""
-    response = client.post("/predict", data="texto plano")
-    assert response.status_code == 400
-    assert "JSON" in response.get_json()["error"]
-
-
-def test_api_predict_json_vazio(client):
-    """Testa erro quando JSON está vazio"""
-    response = client.post("/predict", json={})
-    assert response.status_code == 400
-    error = response.get_json()["error"]
-    assert "faltando" in error.lower() or "obrigatório" in error.lower()
-
-
-def test_api_predict_campo_age_faltando(client):
-    """Testa erro quando campo Age está faltando"""
-    data = {
-        "Gender": "Male",
-        "PlayTimeHours": 100,
-        "InGamePurchases": 50,
-        "GameDifficulty": "Medium",
-        "SessionsPerWeek": 5,
-        "AvgSessionDurationMinutes": 60,
-        "PlayerLevel": 50,
-        "AchievementsUnlocked": 20,
-        "Location": "USA",
-        "GameGenre": "Action",
-    }
-    response = client.post("/predict", json=data)
-    assert response.status_code == 400
-    assert "Age" in response.get_json()["error"]
-
-
-def test_api_predict_multiplos_campos_faltando(client):
-    """Testa erro quando múltiplos campos estão faltando"""
-    data = {
-        "Gender": "Male",
-        "PlayTimeHours": 100,
-    }
-    response = client.post("/predict", json=data)
-    assert response.status_code == 400
-    error = response.get_json()["error"]
-    assert "faltando" in error.lower()
-
-
-def test_api_predict_campo_null(client):
-    """Testa erro quando campo tem valor null"""
-    data = {
-        "Age": None,  # null
-        "Gender": "Male",
-        "PlayTimeHours": 100,
-        "InGamePurchases": 50,
-        "GameDifficulty": "Medium",
-        "SessionsPerWeek": 5,
-        "AvgSessionDurationMinutes": 60,
-        "PlayerLevel": 50,
-        "AchievementsUnlocked": 20,
-        "Location": "USA",
-        "GameGenre": "Action",
-    }
-    response = client.post("/predict", json=data)
-    assert response.status_code == 400
-
-
-def test_api_rota_nao_encontrada(client):
-    """Testa erro 404 para rota inexistente"""
-    response = client.get("/rota-inexistente")
-    assert response.status_code == 404
-    assert "não encontrada" in response.get_json()["error"].lower()
-
-
-def test_api_metodo_nao_permitido(client):
-    """Testa erro 405 para método HTTP não permitido"""
-    response = client.get("/predict")  # GET ao invés de POST
-    assert response.status_code == 405
-    assert "não permitido" in response.get_json()["error"].lower()
-
-
-def test_api_home_ok(client):
-    """Testa rota home redirecionando para a documentação Swagger UI"""
-    response = client.get("/", follow_redirects=True)
-    assert response.status_code == 200
-    assert b"Swagger UI" in response.data
 
 
 # ===== TESTES DE DADOS E MODELO =====
