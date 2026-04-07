@@ -54,7 +54,7 @@ Em seguida, abra `http://localhost:8000` no navegador.
   "Age": 25,
   "Gender": "Male",
   "PlayTimeHours": 100.5,
-  "InGamePurchases": 50,
+  "InGamePurchases": 1,
   "GameDifficulty": "Medium",
   "SessionsPerWeek": 5,
   "AvgSessionDurationMinutes": 60,

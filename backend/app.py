@@ -257,7 +257,7 @@ def predict():
         validations = {
             "Age": {"min": 5, "max": 100},
             "PlayTimeHours": {"min": 0, "max": 10000},
-            "InGamePurchases": {"min": 0, "max": 100000},
+            "InGamePurchases": {"min": 0, "max": 1},
             "SessionsPerWeek": {"min": 0, "max": 168},
             "AvgSessionDurationMinutes": {"min": 1, "max": 1440},
             "PlayerLevel": {"min": 1, "max": 999},

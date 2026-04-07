@@ -18,7 +18,7 @@ function getFormData() {
   };
 
   // Validar se todos os campos foram preenchidos
-  for (const [key, value] of Object.entries(fields)) {
+  for (const [, value] of Object.entries(fields)) {
     if (value === "" || value === null) {
       return null;
     }
@@ -39,7 +39,7 @@ function getFormData() {
   const validations = [
     { field: "Age", min: 5, max: 100, label: "Idade" },
     { field: "PlayTimeHours", min: 0, max: 10000, label: "Horas de Jogo" },
-    { field: "InGamePurchases", min: 0, max: 100000, label: "Compras no Jogo" },
+    { field: "InGamePurchases", min: 0, max: 1, label: "Compras no Jogo" },
     { field: "SessionsPerWeek", min: 0, max: 168, label: "Sessões por Semana" },
     { field: "AvgSessionDurationMinutes", min: 1, max: 1440, label: "Duração Média da Sessão" },
     { field: "PlayerLevel", min: 1, max: 999, label: "Nível do Jogador" },
