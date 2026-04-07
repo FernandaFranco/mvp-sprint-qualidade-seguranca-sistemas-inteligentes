@@ -16,7 +16,7 @@ MVP da sprint de Qualidade de Software, Segurança e Sistemas Inteligentes da p�
 
 ## Links
 
-- [Notebook no Google Colab](https://colab.research.google.com/drive/1TdLTwHil_aeLKGLA_u4ADDnOixhQv9rc?usp=sharing)
+- [Notebook no Google Colab](https://colab.research.google.com/github/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/blob/main/MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb)
 - [Vídeo de apresentação](https://youtube.com/seu-link-aqui)
 
 ## Tecnologias
@@ -126,7 +126,7 @@ O dataset contém 40.034 registros com métricas de jogadores online. O modelo e
 
 O notebook `MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb` contém todo o processo de criação do modelo de machine learning. Pode ser aberto e executado no Google Colab sem necessidade de configuração adicional.
 
-[Abrir no Google Colab](https://colab.research.google.com/drive/1TdLTwHil_aeLKGLA_u4ADDnOixhQv9rc?usp=sharing)
+[Abrir no Google Colab](https://colab.research.google.com/github/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/blob/main/MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb)
 
 ## Estrutura do projeto
 
