@@ -206,7 +206,7 @@ def test_api_predict_dificuldade_invalida(client):
     data = {
         "Age": 25,
         "Gender": "Male",
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Impossible",  # Inválido
         "SessionsPerWeek": 5,
