@@ -2,6 +2,16 @@
 
 [![Python CI](https://github.com/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/actions/workflows/python-app.yml/badge.svg)](https://github.com/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/actions/workflows/python-app.yml)
 
+```
+  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+  ░                                       ░
+  ░     PREDITOR DE ENGAJAMENTO GAMER     ░
+  ░                                       ░
+  ░        ▶  INSIRA UMA MOEDA  ◀         ░
+  ░                                       ░
+  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+```
+
 MVP da sprint de Qualidade de Software, Segurança e Sistemas Inteligentes da pós-graduação em Engenharia de Software da PUC-Rio. O projeto utiliza modelos de machine learning para prever o nível de engajamento (Alto, Médio ou Baixo) de jogadores online, com base em dados demográficos e métricas de jogo.
 
 ## Links
@@ -102,19 +112,21 @@ Na raiz do projeto, ative o ambiente virtual e execute os testes:
     source backend/env/bin/activate
     pytest backend/test_model.py -v
 
-### Integração contínua
+## Integração contínua
 
-O repositório agora inclui um workflow GitHub Actions em `.github/workflows/python-app.yml` que executa `pytest` em cada push e pull request para `main`.
-
-## Notebook
-
-O notebook `MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb` contém todo o processo de criação do modelo de machine learning. Pode ser aberto e executado no Google Colab sem necessidade de configuração adicional. Se preferir, use a URL acima.
+O repositório inclui um workflow GitHub Actions em `.github/workflows/python-app.yml` que executa `pytest` em cada push e pull request para `main`.
 
 ## Dataset
 
 Fonte: [Predict Online Gaming Behavior Dataset](https://www.kaggle.com/datasets/rabieelkharoua/predict-online-gaming-behavior-dataset) (Kaggle)
 
 O dataset contém 40.034 registros com métricas de jogadores online. O modelo escolhido (Árvore de Classificação otimizada) atingiu 90% de acurácia.
+
+## Notebook
+
+O notebook `MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb` contém todo o processo de criação do modelo de machine learning. Pode ser aberto e executado no Google Colab sem necessidade de configuração adicional.
+
+[Abrir no Google Colab](https://colab.research.google.com/drive/1TdLTwHil_aeLKGLA_u4ADDnOixhQv9rc?usp=sharing)
 
 ## Estrutura do projeto
 
