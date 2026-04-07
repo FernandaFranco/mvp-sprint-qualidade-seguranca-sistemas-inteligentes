@@ -53,7 +53,7 @@ Em seguida, abra `http://localhost:8000` no navegador.
 {
   "Age": 25,
   "Gender": "Male",
-  "PlayTimeHours": 100.5,
+  "PlayTimeHours": 10.5,
   "InGamePurchases": 1,
   "GameDifficulty": "Medium",
   "SessionsPerWeek": 5,
@@ -64,6 +64,18 @@ Em seguida, abra `http://localhost:8000` no navegador.
   "GameGenre": "Action"
 }
 ```
+
+Ranges aceitos por campo numérico:
+
+| Campo | Tipo | Valores aceitos |
+|---|---|---|
+| Age | inteiro | 10–80 |
+| PlayTimeHours | decimal | 0–24 |
+| InGamePurchases | binário | 0 ou 1 |
+| SessionsPerWeek | inteiro | 0–28 |
+| AvgSessionDurationMinutes | inteiro | 1–240 |
+| PlayerLevel | inteiro | 1–100 |
+| AchievementsUnlocked | inteiro | 0–100 |
 
 - Resposta de sucesso:
 

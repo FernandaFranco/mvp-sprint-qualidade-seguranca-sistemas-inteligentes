@@ -255,13 +255,13 @@ def predict():
 
         # Validar ranges dos valores numéricos
         validations = {
-            "Age": {"min": 5, "max": 100},
-            "PlayTimeHours": {"min": 0, "max": 10000},
+            "Age": {"min": 10, "max": 80},
+            "PlayTimeHours": {"min": 0, "max": 24},
             "InGamePurchases": {"min": 0, "max": 1},
-            "SessionsPerWeek": {"min": 0, "max": 168},
-            "AvgSessionDurationMinutes": {"min": 1, "max": 1440},
-            "PlayerLevel": {"min": 1, "max": 999},
-            "AchievementsUnlocked": {"min": 0, "max": 10000},
+            "SessionsPerWeek": {"min": 0, "max": 28},
+            "AvgSessionDurationMinutes": {"min": 1, "max": 240},
+            "PlayerLevel": {"min": 1, "max": 100},
+            "AchievementsUnlocked": {"min": 0, "max": 100},
         }
 
         # Validar cada campo numérico

@@ -87,7 +87,7 @@ def test_api_predict_sucesso(client):
     data = {
         "Age": 25,
         "Gender": "Male",
-        "PlayTimeHours": 100.5,
+        "PlayTimeHours": 10.5,
         "InGamePurchases": 1,
         "GameDifficulty": "Medium",
         "SessionsPerWeek": 5,
@@ -109,7 +109,7 @@ def test_api_predict_age_invalido(client):
     data = {
         "Age": 150,  # Muito alto
         "Gender": "Male",
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Medium",
         "SessionsPerWeek": 5,
@@ -127,9 +127,9 @@ def test_api_predict_age_invalido(client):
 def test_api_predict_age_muito_baixo(client):
     """Testa validação de idade muito baixa"""
     data = {
-        "Age": 2,  # Abaixo do mínimo 5
+        "Age": 2,  # Abaixo do mínimo 10
         "Gender": "Male",
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Medium",
         "SessionsPerWeek": 5,
@@ -163,14 +163,14 @@ def test_api_predict_playtime_invalido(client):
 
 
 def test_api_predict_sessoes_invalidas(client):
-    """Testa validação de SessionsPerWeek (máx 168)"""
+    """Testa validação de SessionsPerWeek (máx 28)"""
     data = {
         "Age": 25,
         "Gender": "Male",
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Easy",
-        "SessionsPerWeek": 200,  # Acima de 168
+        "SessionsPerWeek": 200,  # Acima de 28
         "AvgSessionDurationMinutes": 60,
         "PlayerLevel": 50,
         "AchievementsUnlocked": 20,
@@ -186,7 +186,7 @@ def test_api_predict_gender_invalido(client):
     data = {
         "Age": 25,
         "Gender": "Other",  # Inválido
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Medium",
         "SessionsPerWeek": 5,
@@ -226,7 +226,7 @@ def test_api_predict_localizacao_invalida(client):
     data = {
         "Age": 25,
         "Gender": "Male",
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Medium",
         "SessionsPerWeek": 5,
@@ -246,7 +246,7 @@ def test_api_predict_genero_jogo_invalido(client):
     data = {
         "Age": 25,
         "Gender": "Male",
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Medium",
         "SessionsPerWeek": 5,
@@ -264,7 +264,7 @@ def test_api_predict_genero_jogo_invalido(client):
 def test_api_predict_valores_zerados(client):
     """Testa predição com valores mínimos válidos"""
     data = {
-        "Age": 5,  # Mínimo
+        "Age": 10,  # Mínimo
         "Gender": "Male",
         "PlayTimeHours": 0,  # Mínimo
         "InGamePurchases": 0,  # Mínimo
@@ -284,15 +284,15 @@ def test_api_predict_valores_zerados(client):
 def test_api_predict_valores_maximos(client):
     """Testa predição com valores máximos válidos"""
     data = {
-        "Age": 100,  # Máximo
+        "Age": 80,  # Máximo
         "Gender": "Female",
-        "PlayTimeHours": 10000,  # Máximo
-        "InGamePurchases": 100000,  # Máximo
+        "PlayTimeHours": 24,  # Máximo
+        "InGamePurchases": 1,  # Máximo
         "GameDifficulty": "Hard",
-        "SessionsPerWeek": 168,  # Máximo
-        "AvgSessionDurationMinutes": 1440,  # Máximo (24h)
-        "PlayerLevel": 999,  # Máximo
-        "AchievementsUnlocked": 10000,  # Máximo
+        "SessionsPerWeek": 28,  # Máximo
+        "AvgSessionDurationMinutes": 240,  # Máximo
+        "PlayerLevel": 100,  # Máximo
+        "AchievementsUnlocked": 100,  # Máximo
         "Location": "Europe",
         "GameGenre": "Strategy",
     }
@@ -306,7 +306,7 @@ def test_api_predict_tipo_invalido(client):
     data = {
         "Age": "vinte e cinco",  # String ao invés de int
         "Gender": "Male",
-        "PlayTimeHours": 100,
+        "PlayTimeHours": 10,
         "InGamePurchases": 1,
         "GameDifficulty": "Medium",
         "SessionsPerWeek": 5,
