@@ -1,5 +1,5 @@
 env/
 __pycache__/
 .pytest_cache/
-.vscode/env/%
+backend/.vscode/
 backend/app.log
