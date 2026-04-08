@@ -166,9 +166,6 @@ OPENAPI_SPEC = {
 with open(BASE_DIR / "modelo.pkl", "rb") as f:
     modelo = pickle.load(f)
 
-with open(BASE_DIR / "scaler.pkl", "rb") as f:
-    scaler = pickle.load(f)
-
 
 @app.route("/")
 def home():
@@ -354,9 +351,8 @@ def predict():
 
         df = df[expected_columns]
 
-        # Escalar e prever
-        df_scaled = scaler.transform(df)
-        prediction = modelo.predict(df_scaled)
+        # Prever (o pipeline já inclui o StandardScaler)
+        prediction = modelo.predict(df)
 
         return jsonify({"prediction": prediction[0]}), 200
 

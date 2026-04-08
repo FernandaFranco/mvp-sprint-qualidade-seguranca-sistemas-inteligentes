@@ -8,12 +8,9 @@ from backend.app import app
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# Carregar modelo e scaler
+# Carregar modelo (pipeline com StandardScaler embutido)
 with open(BASE_DIR / "modelo.pkl", "rb") as f:
     modelo = pickle.load(f)
-
-with open(BASE_DIR / "scaler.pkl", "rb") as f:
-    scaler = pickle.load(f)
 
 # Carregar e preparar os dados (mesmo processo do notebook)
 url = (
@@ -37,10 +34,9 @@ X = df.drop("EngagementLevel", axis=1)
 y = df["EngagementLevel"]
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X, y, test_size=0.2, shuffle=True, random_state=42, stratify=y
 )
-X_test_scaled = scaler.transform(X_test)
-y_pred = modelo.predict(X_test_scaled)
+y_pred = modelo.predict(X_test)
 
 
 # ===== TESTES DE MÉTRICAS DO MODELO =====
@@ -330,10 +326,12 @@ def test_modelo_carregamento():
     assert hasattr(modelo, "predict")
 
 
-def test_scaler_carregamento():
-    """Verifica se scaler foi carregado corretamente"""
-    assert scaler is not None
-    assert hasattr(scaler, "transform")
+def test_pipeline_contem_scaler():
+    """Verifica se o pipeline contém um StandardScaler embutido"""
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import StandardScaler
+    assert isinstance(modelo, Pipeline)
+    assert any(isinstance(step, StandardScaler) for _, step in modelo.steps)
 
 
 def test_dataset_estrutura():
