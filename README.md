@@ -17,7 +17,7 @@ MVP da sprint de Qualidade de Software, Segurança e Sistemas Inteligentes da p�
 ## Links
 
 - [Notebook no Google Colab](https://colab.research.google.com/github/FernandaFranco/mvp-sprint-qualidade-seguranca-sistemas-inteligentes/blob/main/MVP_Qualidade_Software_Seguranca_Sistemas_Inteligentes.ipynb)
-- [Vídeo de apresentação](https://youtube.com/seu-link-aqui)
+- [Vídeo de apresentação](https://youtu.be/hp2VyJ3DZIs?si=QaPj1-pte7MB-bcj)
 
 ## Tecnologias
 
